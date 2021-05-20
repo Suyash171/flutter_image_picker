@@ -3,6 +3,12 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:image_picker_gallery_camera/image_picker_gallery_camera.dart';
+import 'dart:io';
+import 'dart:typed_data';
+
+import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
+import 'dart:async';
 
 void main() {
   runApp(MyApp());
@@ -34,8 +40,11 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
   var _image;
+
+
   //File _image;
   //final picker = ImagePicker();
+
 
 /*
   Future getImage() async {
@@ -50,35 +59,11 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 */
+  @override
+  void initState() {
+    super.initState();
 
-  Future getImage(ImgSource source) async {
-    var image = await ImagePickerGC.pickImage(
-        enableCloseButton: true,
-        closeIcon: Icon(
-          Icons.close,
-          color: Colors.red,
-          size: 12,
-        ),
-        context: context,
-        source: source,
-        barrierDismissible: true,
-        cameraIcon: Icon(
-          Icons.camera_alt,
-          color: Colors.red,
-        ), //cameraIcon and galleryIcon can change. If no icon provided default icon will be present
-        cameraText: Text(
-          "From Camera",
-          style: TextStyle(color: Colors.red),
-        ),
-        galleryText: Text(
-          "From Gallery",
-          style: TextStyle(color: Colors.blue),
-        ));
-    setState(() {
-      _image = image;
-    });
   }
-
 
   void _incrementCounter() {
     setState(() {
@@ -112,6 +97,7 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Icon(Icons.add_a_photo),
       ),*/
       body: Center(
+        key: globalKey,
         child: SingleChildScrollView(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -155,6 +141,9 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                 ),
               ),
+              Container(
+
+              ),
               _image != null ? Image.file(File(_image.path)) : Container(),
             ],
           ),
@@ -163,3 +152,4 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 }
+
